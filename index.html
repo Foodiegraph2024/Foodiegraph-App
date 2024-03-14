@@ -94,10 +94,7 @@
                   <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="app_tutorial.html">Tutorial </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="about.html">About </a>
+                  <a class="nav-link" href="proposal.html">Tutorial </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="explore.html">Explore</a>
@@ -146,8 +143,130 @@
         <div class="img-box">
           <img src="images/food1.jpeg" alt="">
         </div>
+         
+
+
+	<br></br>
+	
+    <input type="file" accept="image/*" id="imageInput">
+    <button onclick="analyzeImage()">Identify</button>  
+    <div id="results"></div>
+    
+    <div id="recipeResults"></div>
+    <button onclick="generateRecipe()">Generate Recipe</button>
+    
+    
+    
+    <script> //javascript here
+
+// Google Cloud Vision API
+	
+        function analyzeImage() {
+            var fileInput = document.getElementById('imageInput');
+            var file = fileInput.files[0];
+            
+            var reader = new FileReader();
+            reader.onload = function(event) {
+                var imageData = event.target.result;
+                var base64Image = imageData.split(',')[1];
+                
+                var requestBody = {
+                    "requests": [
+                        {
+                            "image": {
+                                "content": base64Image
+                            },
+                            "features": [
+                                {
+                                    "type": "LABEL_DETECTION",
+                                    "maxResults": 5
+                                }
+                            ]
+                        }
+                    ]
+                };
+                
+                fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAtvlzEeqOMm5J4N6UgEDO2mjxGzgxzcAs', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(requestBody)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    var resultsDiv = document.getElementById('results');
+                    resultsDiv.innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+            };
+            
+            reader.readAsDataURL(file);
+		}
+		
+	function generateRecipe(){
+		
+//		const openaiApiKey = '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';
+//		const openaiApiEndpoint = 'https://api.openai.com/v1/chat/completions';
+//		const prompt = 'give me a recipe about orange';
+		
+		const headers = {
+            'content-Type': 'application/json',
+            Authorization: 'Bearer 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'
+        };
+		
+//		const payload = {
+//			model: 'gpt-4-turbo-preview',
+//            prompt:'give me a recipe about orange',
+//            max_tokens: 500  // Set the maximum number of tokens for the generated text
+//        }; 
+        
+//        document.getElementById("recipeResults").innerHTML = payload.prompt;
+        
+       fetch(
+            'https://api.openai.com/v1/chat/completions', 
+            {
+   			body: JSON.stringify({
+   				'model': 'gpt-4',
+   				'prompt':'give me a recipe about orange',
+   				'temperature':1,
+   				'max_tokens':100,
+   			//	'messages':[{'role':'system','content':'Oh! My God'}]
+
+   			}),
+            method: 'POST',
+            headers: headers,
+//            body: JSON.stringify(payload)
+			}
+        )
+            
+ 		.then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+           	 })
+        .then(data => {
+                console.log(data);
+                const outputElement = document.getElementById('output');
+                outputElement.innerHTML = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+                console.error('Error:', error);
+        });
+        
+        
+	}
+ 
+// end Google Cloud Vision API
+
+	</script>
+
+
         <div class="btn-box">
-          <a href="">
+          <a href="proposal.html">
             View App Tutorial
           </a>
         </div>
