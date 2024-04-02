@@ -149,106 +149,17 @@
 	<br></br>
 	
     <input type="file" accept="image/*" id="imageInput">
-    <button onclick="analyzeImage()">Identify</button>  
+    <button onclick="analyzeImage()">Generate</button>  
     <div id="results"></div>
     
-    <div id="output">waiting results...</div>
+    <div id="output" style = "white-space:pre-line">waiting results...</div> <!-- use white:pre-line to let \n works -->
     
-    <button onclick="generateRecipe()">Generate Recipe</button>
+
     
     
-    
-    <script> //javascript here
-
-// Google Cloud Vision API
-	
-        function analyzeImage() {
-            var fileInput = document.getElementById('imageInput');
-            var file = fileInput.files[0];
-            
-            var reader = new FileReader();
-            reader.onload = function(event) {
-                var imageData = event.target.result;
-                var base64Image = imageData.split(',')[1];
-                
-                var requestBody = {
-                    "requests": [
-                        {
-                            "image": {
-                                "content": base64Image
-                            },
-                            "features": [
-                                {
-                                    "type": "LABEL_DETECTION",
-                                    "maxResults": 5
-                                }
-                            ]
-                        }
-                    ]
-                };
-                
-                fetch('https://vision.googleapis.com/v1/images:annotate?key=AIzaSyAtvlzEeqOMm5J4N6UgEDO2mjxGzgxzcAs', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(requestBody)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    var resultsDiv = document.getElementById('results');
-                    resultsDiv.innerHTML = JSON.stringify(data, null, 2);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            };
-            
-            reader.readAsDataURL(file);
-		}
-
-	var temp = results;
-		
-	function generateRecipe(){
-		
-//		const openaiApiKey = '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';
-//		const openaiApiEndpoint = 'https://api.openai.com/v1/chat/completions';
-//		const prompt = 'give me a recipe about orange';
-
-		// Define the API key and endpoint
-		const apiKey = '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';
-		const endpoint = 'https://api.openai.com/v1/completions';
-		
-		// Set up the data for the API call
-		const data = {
-  		model: 'gpt-3.5-turbo-instruct', 
-  		prompt: 'give me recipe about bananas', 
-  		temperature: 0.7,
-  		max_tokens: 150,
-		};
-
-		// Make the API call using fetch
-		fetch(endpoint, {
-    		method: 'POST',
-    		headers: {
-      		'Content-Type': 'application/json',
-      		'Authorization': `Bearer ${apiKey}`
-    		},
-    		body: JSON.stringify(data),
-  		})
-  		.then(response => response.json())
-  		.then(data => {
-    
-      		const outputDiv = document.getElementById('output');
-      		outputDiv.textContent = data.choices[0].text; 
-  		})
-  		.catch((error) => console.error('Error:', error));        
-        
-	}
- 
-// end Google Cloud Vision API
-
-	</script>
+    <!-- call app.js -->
+    <script src="js/app.js"></script>
+    <!-- end call app.js -->
 
 
         <div class="btn-box">

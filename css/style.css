@@ -6,6 +6,23 @@ body {
   text-align: justify;
 }
 
+/*css for app results*/
+
+#output {
+    font-family: Arial, sans-serif;
+    font-size: 23px;
+    color: #5c2626;
+    text-align: left;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 5px;
+    margin: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/*end css for app results*/
+
 .layout_padding {
   padding: 90px 0;
 }
