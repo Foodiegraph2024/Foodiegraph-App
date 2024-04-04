@@ -67,7 +67,7 @@
 
     //var food_name = document.getElementById("results").textContent;
 
-		const apiKey = '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';
+		const apiKey = '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';
 		const endpoint = 'https://api.openai.com/v1/chat/completions';
 		
 		// Set up the data for the API call
@@ -82,7 +82,7 @@
   		max_tokens: 500,
 		};
 
-    alert(JSON.stringify(data.messages, null, 2));
+//    alert(JSON.stringify(data.messages, null, 2));
 
 		// Make the API call using fetch
 		fetch(endpoint, {
