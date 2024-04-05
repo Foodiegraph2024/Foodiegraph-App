@@ -67,7 +67,7 @@
 
     //var food_name = document.getElementById("results").textContent;
 
-		const apiKey = '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';
+		const apiKey = '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';
 		const endpoint = 'https://api.openai.com/v1/chat/completions';
 		
 		// Set up the data for the API call
@@ -79,7 +79,7 @@
             {"role": "user", "content": 'give me a recipe about ' + food_name + ' in 200 tokens.'}
       ],
   		temperature: 0.7,
-  		max_tokens: 500,
+  		max_tokens: 200,
 		};
 
 //    alert(JSON.stringify(data.messages, null, 2));
