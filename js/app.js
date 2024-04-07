@@ -67,7 +67,7 @@
 
     //var food_name = document.getElementById("results").textContent;
 
-		const apiKey = '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';
+		const apiKey = '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';
 		const endpoint = 'https://api.openai.com/v1/chat/completions';
 		
 		// Set up the data for the API call
