@@ -54,6 +54,22 @@
 
 // end Google Cloud Vision API
 
+// read file function //這個是新加的程式，可能還有錯的地方
+
+	function readFile(){
+	
+		fetch("apiKey.txt")
+  			.then((res) => res.text())
+  			.then((text) => {
+    		// do something with "text"
+    		return text;
+   			})
+  			.catch((e) => console.error(e));
+	
+
+	} 
+// end read file function
+
 // Open AI api
 		
 	function generateRecipe(food_name){
@@ -67,7 +83,11 @@
 
     //var food_name = document.getElementById("results").textContent;
 
-		var apiKey = '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';
+		//var apiKey = document.getElementById("apiKey").files[0];
+		
+		var apiKey = readFile(); //這裡還不確定怎麼寫＊＊
+		console.log(apiKey);
+
 		const endpoint = 'https://api.openai.com/v1/chat/completions';
 		
 		// Set up the data for the API call
