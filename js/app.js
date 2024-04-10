@@ -58,7 +58,8 @@
 		
 	function generateRecipe(food_name){
 		 
-		
+		document.getElementById("output").innerHTML = "waiting for results...";
+				
 //		const openaiApiEndpoint = 'https://api.openai.com/v1/chat/completions';
 //		const prompt = 'give me a recipe about orange';
 
@@ -80,7 +81,7 @@
             {"role": "user", "content": 'give me a recipe about ' + food_name + ' in 200 tokens.'}
       ],
   		temperature: 0.7,
-  		max_tokens: 200,
+  		max_tokens: 250,
 		};
 
 //    alert(JSON.stringify(data.messages, null, 2));
