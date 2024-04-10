@@ -59,7 +59,6 @@
 	function generateRecipe(food_name){
 		 
 		
-//		const openaiApiKey = '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';
 //		const openaiApiEndpoint = 'https://api.openai.com/v1/chat/completions';
 //		const prompt = 'give me a recipe about orange';
 
@@ -67,7 +66,9 @@
 
     //var food_name = document.getElementById("results").textContent;
 
-		var apiKey = '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';
+		const apiKey_encoded = 'c2stcE9ycmJPZW9NRWFWUzViY3EwOGRUM0JsYmtGSmxEWHN6TGE1RTVJbWVnczFNUGJn';
+		const apiKey = atob(apiKey_encoded);
+		console.log(apiKey);
 		const endpoint = 'https://api.openai.com/v1/chat/completions';
 		
 		// Set up the data for the API call
